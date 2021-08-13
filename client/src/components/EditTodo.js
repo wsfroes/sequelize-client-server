@@ -1,30 +1,33 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 
-const EditTodo = ({ todo }) => {
-    const [description, setDescription] = useState(todo.description);
+const EditTodo = ({ users }) => {
+    const [name, setName] = useState(users.name);
+    const [email, setEmail] = useState(users.email);
 
     // edit description function
-    const updateDescription = async e => {
+    const updateUser = async e => {
         e.preventDefault();
         try {
-            const body = {description};
-            const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
+            const body = {name, email};
+            console.log(body);
+            const response = await fetch(`http://localhost:3333/users/${users.id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
             });
-            window.location = "/";
+           // window.location = "/";
         } catch (err) {
             console.error(err.mesage);
         }
     }
+    
     return (
         <Fragment>
             <button
                 type="button"
                 className="btn btn-warning"
                 data-bs-toggle="modal"
-                data-bs-target={`#id${todo.todo_id}`}>
+                data-bs-target={`#id${users.id}`}>
                 Edit
             </button>
 
@@ -32,7 +35,7 @@ const EditTodo = ({ todo }) => {
 
             <div
                 className="modal fade"
-                id={`id${todo.todo_id}`}
+                id={`id${users.id}`}
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div className="modal-dialog">
@@ -40,34 +43,51 @@ const EditTodo = ({ todo }) => {
                         <div className="modal-header">
                             <h5
                                 className="modal-title"
-                                id="exampleModalLabel">Edit Todo</h5>
+                                id="exampleModalLabel">Editar Usuário</h5>
                             <button
                                 type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
-                                onClick={() => setDescription(todo.description)} />
+                                onClick={() => {
+                                    setName(users.name)
+                                    setEmail(users.email)
+                                }} 
+                            />
                         </div>
                         <div className="modal-body">
+                            <label>Usuário:
                             <input 
                             type="text" 
                             className="form-control" 
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
+                            value={name}
+                            onChange={e => setName(e.target.value)}
                             />
+                            </label>
+                            <label>Email:
+                            <input
+                            type="text" 
+                            className="form-control" 
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            />
+                            </label>
                         </div>
                         <div className="modal-footer">
                             <button
                                 type="button"
                                 className="btn btn-warning"
                                 data-bs-dismiss="modal"
-                                onClick={e => updateDescription(e)}
+                                onClick={e => updateUser(e)}
                             >Edit</button>
                             <button
                                 type="button"
                                 className="btn btn-danger"
                                 data-bs-dismiss="modal"
-                                onClick={() => setDescription(todo.description)}
+                                onClick={() => {
+                                    setName(users.name)
+                                    setEmail(users.email)
+                                }}
                             >Close</button>
                         </div>
                     </div>
