@@ -9,13 +9,14 @@ const EditTodo = ({ users }) => {
         e.preventDefault();
         try {
             const body = {name, email};
-            console.log(body);
+            
             const response = await fetch(`http://localhost:3333/users/${users.id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
             });
-           // window.location = "/";
+            console.log(response);
+            window.location = "/";
         } catch (err) {
             console.error(err.mesage);
         }

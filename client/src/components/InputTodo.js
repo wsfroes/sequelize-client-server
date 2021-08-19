@@ -10,16 +10,14 @@ const InputTodo = () => {
         try {
             const body = { name , email};
             console.log(body);
-            const body_e = { email };
-            console.log(body_e);
-            //console.log(body_n, body_e);
+            
             const response = await fetch("http://localhost:3333/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
             console.log(response);
-            //window.location = "/";
+            window.location = "/";
         } catch (err) {
             console.error(err.mesage);
         }
