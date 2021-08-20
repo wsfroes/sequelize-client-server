@@ -11,7 +11,7 @@ const InputTodo = () => {
             const body = { name , email};
             console.log(body);
             
-            const response = await fetch("http://localhost:3333/users", {
+            const response = await fetch("https://node-serv-todo.herokuapp.com/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)

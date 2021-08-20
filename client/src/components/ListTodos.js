@@ -9,7 +9,7 @@ const ListTodo = () => {
     //delete Todo function
     const deleteUser = async(id) => {
         try {
-            const deleteUser = await fetch(`http://localhost:3333/users/${id}`, {
+            const deleteUser = await fetch(`https://node-serv-todo.herokuapp.com/users/${id}`, {
                 method: "DELETE",
             });
             setTodos(todos.filter(users => users.id !== id));
@@ -20,7 +20,7 @@ const ListTodo = () => {
 
     const getTodos = async () => {
         try {
-            const response = await fetch("http://localhost:3333/users");
+            const response = await fetch("https://node-serv-todo.herokuapp.com/users");
             const jsonData = await response.json();
             console.log(jsonData);
             setTodos(jsonData);

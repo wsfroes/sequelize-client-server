@@ -10,7 +10,7 @@ const EditTodo = ({ users }) => {
         try {
             const body = {name, email};
             
-            const response = await fetch(`http://localhost:3333/users/${users.id}`, {
+            const response = await fetch(`https://node-serv-todo.herokuapp.com/users/${users.id}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
