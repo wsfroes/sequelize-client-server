@@ -1,6 +1,14 @@
 const express = require('express');
 const cors = require("cors");
 const routes = require('./routes');
+const db = require("./models/Connection");
+
+//const populate = require("./populate");
+// create ou init tables
+db.sequelize.sync().then(() => {
+  console.log("Drop and re-sync db.");
+//  populate();
+});
 
 require('./config/db');
 

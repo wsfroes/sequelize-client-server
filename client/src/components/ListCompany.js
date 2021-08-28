@@ -1,35 +1,35 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-import EditTodo from "./EditTodo";
+import EditCompany from "./EditCompany";
 
-const ListTodo = () => {
+const ListCompany = () => {
 
-    const [todos, setTodos] = useState([]);
+    const [companys, setCompanys] = useState([]);
 
     //delete Todo function
     const deleteCompany = async(id) => {
         try {
-            const deleteUser = await fetch(`http://localhost:5000/companys/${id}`, {
+            const deleteCompany = await fetch(`http://localhost:5000/companys/${id}`, {
                 method: "DELETE",
             });
-            setTodos(todos.filter(users => users.id !== id));
+            setCompanys(companys.filter(companys => companys.id !== id));
         } catch (err) {
             console.error(err.message);
         }
     }
 
-    const getTodos = async () => {
+    const getCompanys = async () => {
         try {
             const response = await fetch("http://localhost:5000/companys");
             const jsonData = await response.json();
             console.log(jsonData);
-            setTodos(jsonData);
+            setCompanys(jsonData);
         } catch (err) {
             console.error(err.mensage);
         }
     }
     useEffect(() => {
-        getTodos();
+        getCompanys();
     }, []);
 
     return (
@@ -39,18 +39,19 @@ const ListTodo = () => {
                 <thead>
                     <tr>
                         <th>Companhia</th>
-                        <th>Schema</th>
                         <th>Link de Ajuda</th>
+                        <th>Schema</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map(companys => (
+                    {companys.map(companys => (
                         <tr key={companys.id}>
-                            <td>{companys.name}</td>
-                            <td>{companys.email}</td>
-                            <td><EditTodo companys={companys} /></td>
+                            <td>{companys.nameCompany}</td>
+                            <td>{companys.urlHelp}</td>
+                            <td>{companys.schema}</td>
+                            <td><EditCompany companys={companys} /></td>
                             <td>
                                 <button 
                                 className="btn btn-danger" 
@@ -65,4 +66,4 @@ const ListTodo = () => {
     )
 }
 
-export default ListTodo;
+export default ListCompany;
