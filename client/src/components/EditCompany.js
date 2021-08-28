@@ -1,18 +1,19 @@
 import React, { Fragment, useState } from "react";
 
-const EditTodo = ({ users }) => {
-    const [name, setName] = useState(users.name);
-    const [email, setEmail] = useState(users.email);
+const EditCompany = ({ companys }) => {
+    const [nameCompany, setNameCompany] = useState("");
+    const [schema, setSchema] = useState("");
+    const [urlHelp, setUrlHelp] = useState("");
 
     // edit description function
     const updateUser = async e => {
         e.preventDefault();
         try {
-            const body = {name, email};
-            
-            const response = await fetch(`http://localhost:5000/users/${users.id}`, {
+            const body = { nameCompany, schema, urlHelp };
+
+            const response = await fetch(`http://localhost:5000/companys/${companys.id}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
             console.log(response);
@@ -21,22 +22,20 @@ const EditTodo = ({ users }) => {
             console.error(err.mesage);
         }
     }
-    
+
     return (
         <Fragment>
             <button
                 type="button"
                 className="btn btn-warning"
                 data-bs-toggle="modal"
-                data-bs-target={`#id${users.id}`}>
+                data-bs-target={`#id${companys.id}`}>
                 Edit
             </button>
 
-            {/* id = id10 */}
-
             <div
                 className="modal fade"
-                id={`id${users.id}`}
+                id={`id${companys.id}`}
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div className="modal-dialog">
@@ -44,34 +43,43 @@ const EditTodo = ({ users }) => {
                         <div className="modal-header">
                             <h5
                                 className="modal-title"
-                                id="exampleModalLabel">Editar Usuário</h5>
+                                id="exampleModalLabel">Editar Companhia</h5>
                             <button
                                 type="button"
                                 className="btn-close"
                                 data-bs-dismiss="modal"
                                 aria-label="Close"
                                 onClick={() => {
-                                    setName(users.name)
-                                    setEmail(users.email)
-                                }} 
+                                    setNameCompany(companys.nameCompany)
+                                    setSchema(companys.schema)
+                                    setUrlHelp(companys.urlHelp)
+                                }}
                             />
                         </div>
                         <div className="modal-body">
-                            <label>Usuário:
-                            <input 
-                            type="text" 
-                            className="form-control" 
-                            value={name}
-                            onChange={e => setName(e.target.value)}
-                            />
+                            <label>Companhia:
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={nameCompany}
+                                    onChange={e => setNameCompany(e.target.value)}
+                                />
                             </label>
-                            <label>Email:
-                            <input
-                            type="text" 
-                            className="form-control" 
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            />
+                            <label>Schema:
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={schema}
+                                    onChange={e => setSchema(e.target.value)}
+                                />
+                            </label>
+                            <label>Link de Ajuda:
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    value={urlHelp}
+                                    onChange={e => setUrlHelp(e.target.value)}
+                                />
                             </label>
                         </div>
                         <div className="modal-footer">
@@ -86,8 +94,9 @@ const EditTodo = ({ users }) => {
                                 className="btn btn-danger"
                                 data-bs-dismiss="modal"
                                 onClick={() => {
-                                    setName(users.name)
-                                    setEmail(users.email)
+                                    setNameCompany(companys.nameCompany)
+                                    setSchema(companys.schema)
+                                    setUrlHelp(companys.urlHelp)
                                 }}
                             >Close</button>
                         </div>
@@ -98,4 +107,4 @@ const EditTodo = ({ users }) => {
     )
 }
 
-export default EditTodo;
+export default EditCompany;

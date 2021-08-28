@@ -7,9 +7,9 @@ const ListTodo = () => {
     const [todos, setTodos] = useState([]);
 
     //delete Todo function
-    const deleteUser = async(id) => {
+    const deleteCompany = async(id) => {
         try {
-            const deleteUser = await fetch(`http://localhost:5000/users/${id}`, {
+            const deleteUser = await fetch(`http://localhost:5000/companys/${id}`, {
                 method: "DELETE",
             });
             setTodos(todos.filter(users => users.id !== id));
@@ -20,7 +20,7 @@ const ListTodo = () => {
 
     const getTodos = async () => {
         try {
-            const response = await fetch("http://localhost:5000/users");
+            const response = await fetch("http://localhost:5000/companys");
             const jsonData = await response.json();
             console.log(jsonData);
             setTodos(jsonData);
@@ -38,22 +38,23 @@ const ListTodo = () => {
             <table className="table mt-5 text-center">
                 <thead>
                     <tr>
-                        <th>Usuário</th>
-                        <th>Email</th>
+                        <th>Companhia</th>
+                        <th>Schema</th>
+                        <th>Link de Ajuda</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {todos.map(users => (
-                        <tr key={users.id}>
-                            <td>{users.name}</td>
-                            <td>{users.email}</td>
-                            <td><EditTodo users={users} /></td>
+                    {todos.map(companys => (
+                        <tr key={companys.id}>
+                            <td>{companys.name}</td>
+                            <td>{companys.email}</td>
+                            <td><EditTodo companys={companys} /></td>
                             <td>
                                 <button 
                                 className="btn btn-danger" 
-                                onClick={() => deleteUser(users.id)} 
+                                onClick={() => deleteCompany(companys.id)} 
                                 >Delete</button>
                             </td>
                         </tr>

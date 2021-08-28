@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const InputTodo = () => {
+const InputCompany = () => {
 
     const [nameCompany, setNameCompany] = useState("");
     const [schema, setSchema] = useState("");
@@ -42,7 +42,7 @@ const InputTodo = () => {
                     value={schema}
                     onChange={e => setSchema(e.target.value)}
                 />
-                <h3>Url: </h3>
+                <h3>Link Ajuda: </h3>
                 <input
                     type="text"
                     className="form-control"
@@ -61,4 +61,4 @@ const InputTodo = () => {
     )
 }
 
-export default InputTodo;
+export default InputCompany;

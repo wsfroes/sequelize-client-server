@@ -4,9 +4,10 @@ module.exports = {
     username: "postgres",
     password: "nCABE9rYUC68Ri77spdf",
     database: "sqlnode",
-    define: {
-        // automatically use the fields created_at and updated_at (just form)
-        timestamp: true, 
-        underscored: true,
-    },  
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      },  
 };
